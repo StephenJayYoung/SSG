@@ -8,15 +8,22 @@ var SiteGenerator = require('../index');
 describe('site generator', function() {
 	it.skip('generates a site', function(done) {
 		var generator = new SiteGenerator();
+		// this is going to require the index file. This file will contain our new static site generator
 		var site1 = path.join(__dirname, 'fixtures/site1');
+		//this makes a shortcut to the file called site1
 		var expectedSite1 = path.join(__dirname, 'fixtures/expected/site1');
+		//this makes a shortcut to the file called expected site1
 		var tmpDirectory = path.join(__dirname, 'tmp');
+		//this creates a shortcut for the temporary directory which will hold the new file once 'compiled'
 		generator.generateSite(site1, tmpDirectory, function() {
+		//we don't know how this works yet, but it takes the following arguments: site1, tmpDirectory, and a function. This is the callback.
 			fs.readdir(tmpDirectory, function(err, contents) {
+			//the function is going to read the directory, and if it can't read the file, it will receive an error.
 				expect(contents).to.eql(['index.html']);
-				fs.readFile(path.join(tmpDirectory, 'index.html'), { encoding: 'utf8' }, function(err, contents) {
+				//if it can read the file, it will expect the contents of those files to match the contents of index.html
+				fs.readFile(path.join(tmpDirectory, 'index.html'), { encoding: 'utf8' }, function(err, actualContents) {
 					fs.readFile(path.join(expectedSite1, 'index.html'), { encoding: 'utf8' }, function(err, expectedContents) {
-						expect(contents).to.eql(expectedContents);
+						expect(actualContents).to.eql(expectedContents);
 						done();
 					});
 				});
@@ -24,3 +31,6 @@ describe('site generator', function() {
 		});
 	});
 });
+
+//TODO: write some tests to make sure that the site generator: 1) Can read the file
+// 2)Can find the place where the content is supposed to go, 3) Can implement the
