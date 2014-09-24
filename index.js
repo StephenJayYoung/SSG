@@ -7,17 +7,19 @@ SiteGenerator.prototype.generateSite = function(a, b, cb) {
 	setTimeout(cb, 0);
 };
 //**
-//*@param {strings} 
+//*@param {strings}
 //*@return {string}
 //**
 
 SiteGenerator.prototype.generateFile = function(layoutFile, indexFile, outputFile, cb) {
 	// how do we get the file to read first?
-	var string1 = layoutFile;
-	var string2 = indexFile;
-	var newString = SiteGenerator.prototype.combined(string1, string2);
-	console.log (newString);
-	var newFile = {};
+	fs.readFile(layoutFile, { encoding: 'utf8' }, function(err, layoutContents) {
+		fs.readFile(indexFile, { encoding: 'utf8' }, function(err, indexContents) {
+			var newString = this.combined(layoutContents, indexContents);
+			console.log (newString);
+			var newFile = {};
+		});
+	});
 	//newString read to newFile path to temp file
 	setTimeout(cb, 0);
 };

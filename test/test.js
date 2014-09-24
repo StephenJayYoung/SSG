@@ -39,7 +39,7 @@ describe('site generator', function() {
 
 
 describe('combine files', function() {
-	it.skip('combines the content from 2 files into 1 new file', function(done) {
+	it('combines the content from 2 files into 1 new file', function(done) {
 		//it is going to expect the content to be a file with new content
 		var generator = new SiteGenerator();
 		var layout = path.join(__dirname, 'fixtures/site/layout.html');
