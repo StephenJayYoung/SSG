@@ -1,12 +1,22 @@
 var expect = require('chai').expect;
 var path = require('path');
-var fs = require('fs');
+var fs = require('fs-extra');
 var SiteGenerator = require('../index');
 var fileReader = require('../index');
 // need to input the name of the object that we are operating on
 
 
 describe('site generator', function() {
+	beforeEach(function(done) {
+		var tmpDirectory = path.join(__dirname, 'tmp');
+		fs.remove(tmpDirectory, function(err) {
+			fs.ensureDir(tmpDirectory, function(err) {
+				if (err) { throw err; }
+				done();
+			});
+		});
+	});
+
 	it.skip('generates a site', function(done) {
 		var generator = new SiteGenerator();
 		// this is going to require the index file. This file will contain our new static site generator
