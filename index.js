@@ -6,9 +6,19 @@ SiteGenerator.prototype.generateSite = function(a, b, cb) {
 	// use the generateFile method to make things easier!
 	setTimeout(cb, 0);
 };
+//**
+//*@param {strings} 
+//*@return {string}
+//**
 
-SiteGenerator.prototype.generateFile = function(a, b, c, cb) {
-	// use the generateFile method to make things easier!
+SiteGenerator.prototype.generateFile = function(layoutFile, indexFile, outputFile, cb) {
+	// how do we get the file to read first?
+	var string1 = layoutFile;
+	var string2 = indexFile;
+	var newString = SiteGenerator.prototype.combined(string1, string2);
+	console.log (newString);
+	var newFile = {};
+	//newString read to newFile path to temp file
 	setTimeout(cb, 0);
 };
 

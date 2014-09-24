@@ -82,6 +82,14 @@ describe('generate a string', function() {
 
 
 
+
+
+
+
+
+
+
+
 //given two files, it produces a new file with the combination of content from each
 
 
