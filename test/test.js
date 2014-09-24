@@ -42,20 +42,18 @@ describe('combine files', function() {
 	it('combines the content from 2 files into 1 new file', function(done) {
 		//it is going to expect the content to be a file with new content
 		var generator = new SiteGenerator();
-		var layout = path.join(__dirname, 'fixtures/site/layout.html');
-		var index = path.join(__dirname, 'fixtures/site/index.html');
+		var layout = path.join(__dirname, 'fixtures/site1/layout.html');
+		var index = path.join(__dirname, 'fixtures/site1/index.html');
 
 		var outputDirectory = path.join(__dirname, 'tmp');
 		var outputFile = path.join(outputDirectory, 'index.html');
 
 		var expectedDirectory = path.join(__dirname, 'fixtures/expected/site1');
 		var expectedFile = path.join(expectedDirectory, 'index.html');
-		console.log(expectedFile)
 
 		generator.generateFile(layout, index, outputFile, function(err) {
 			fs.readFile(outputFile, { encoding: 'utf8' }, function(err, outputContents) {
 				fs.readFile(expectedFile, { encoding: 'utf8' }, function(err, expectedContents) {
-					console.log(err)
 					expect(outputContents).to.eql(expectedContents);
 					done();
 				});
@@ -68,7 +66,7 @@ describe('generate a string', function() {
 	it('takes input from 2 strings and returns 1 supercalifragilisticexpialidocious string', function() {
 		//it is going to expect the content to be a file with new content
 		var generator = new SiteGenerator();
-		var string1 = "this is the combo of the {{contents}}";
+		var string1 = "this is the combo of the {{ content }}";
 	 	var string2 = 'majestic things';
 	 	var expectedString = 'this is the combo of the majestic things';
 		var result = generator.combined(string1, string2);      //combine(layoutFile, contentFile);

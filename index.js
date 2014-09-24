@@ -1,8 +1,9 @@
+var fs = require('fs');
 function SiteGenerator() {
 
 }
 
-SiteGenerator.prototype.generateSite = function(a, b, cb) {
+SiteGenerator.prototype.generateSite = function(siteDirectory, outputDirectory, cb) {
 	// use the generateFile method to make things easier!
 	setTimeout(cb, 0);
 };
@@ -12,21 +13,24 @@ SiteGenerator.prototype.generateSite = function(a, b, cb) {
 //**
 
 SiteGenerator.prototype.generateFile = function(layoutFile, indexFile, outputFile, cb) {
-	// how do we get the file to read first?
 	fs.readFile(layoutFile, { encoding: 'utf8' }, function(err, layoutContents) {
+		if (err) { cb(err); return; }
 		fs.readFile(indexFile, { encoding: 'utf8' }, function(err, indexContents) {
+			if (err) { cb(err); return; }
 			var newString = this.combined(layoutContents, indexContents);
-			console.log (newString);
-			var newFile = {};
-		});
-	});
-	//newString read to newFile path to temp file
-	setTimeout(cb, 0);
+			fs.writeFile(outputFile, newString, function(err) {
+				if (err) { cb(err); return; }
+				cb(null);
+			});
+		}.bind(this));
+		//binding "this" brings the generator into the read file function as the "this"
+		//so that the combined method is able to be called.
+	}.bind(this));
 };
 
 //This is going to take 2 arguments (they are both strings). The 2 arguments are the two inputs. The output will return a string. 
 SiteGenerator.prototype.combined = function(string1, string2) {
-	var newString = string1.replace('{{contents}}', string2);
+	var newString = string1.replace('{{ content }}', string2);
 	return newString;
 };
 
