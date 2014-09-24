@@ -3,6 +3,7 @@ var path = require('path');
 var fs = require('fs');
 var SiteGenerator = require('../index');
 var fileReader = require('../index');
+var helpers = require('./helpers');
 // need to input the name of the object that we are operating on
 
 
@@ -17,17 +18,10 @@ describe('site generator', function() {
 		var tmpDirectory = path.join(__dirname, 'tmp');
 		//this creates a shortcut for the temporary directory which will hold the new file once 'compiled'
 		generator.generateSite(site1, tmpDirectory, function() {
-		//we don't know how this works yet, but it takes the following arguments: site1, tmpDirectory, and a function. This is the callback.
-			fs.readdir(tmpDirectory, function(err, contents) {
-			//the function is going to read the directory, and if it can't read the file, it will receive an error.
-				expect(contents).to.eql(['index.html']);
-				//if it can read the file, it will expect the contents of those files to match the contents of index.html
-				fs.readFile(path.join(tmpDirectory, 'index.html'), { encoding: 'utf8' }, function(err, actualContents) {
-					fs.readFile(path.join(expectedSite1, 'index.html'), { encoding: 'utf8' }, function(err, expectedContents) {
-						expect(actualContents).to.eql(expectedContents);
-						done();
-					});
-				});
+			var dirs = { expected: expectedSite1, output: tmpDirectory };
+			helpers.dirsContents(dirs, function(err, contents) {
+				expect(contents.output).to.eql(contents.expected);
+				done();
 			});
 		});
 	});
