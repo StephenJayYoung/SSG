@@ -1,0 +1,28 @@
+{
+  "name": "SSG",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "dependencies": {
+    "chai": "^1.9.1"
+  },
+  "devDependencies": {
+    "mocha": "^1.21.4"
+  },
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/StephenJayYoung/SSG.git"
+  },
+  "author": "Steve and Andrea",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/StephenJayYoung/SSG/issues"
+  },
+  "homepage": "https://github.com/StephenJayYoung/SSG"
+}

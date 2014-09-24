@@ -35,15 +35,27 @@ describe('site generator', function() {
 
 //TODO: Write some tests to make sure that the site generator: 1) Can read the file,
 // 2) Can find the place where the content is supposed to go, 3) Can find what needs to be replaced.
+//this test makes sure we can find the place where the content will go
+describe('combine files', function() {
+	it.skip('combines the content from 2 files into 1 new file', function(done) {
+	//it is going to expect the content to be a file with new content
+	var generator = new SiteGenerator();
+	var expectedSite1 = path.join(__dirname, 'fixtures/expected/site1');
+	var layout = path.join(_dirname, 'fixtures/site/layout.html');
+	var index = path.join(_dirname, 'fixtures/site/index.html');
+	var newFile = generator.generateSite(layout, index);      //combine(layoutFile, contentFile);
 
-//this test makes sure that the generator can read the file
-describe('file reader', function() {
-	it.skip('reads the file', function(done) {
-		var reader = new fileReader(); // I added a new path for this one, not sure if needed :)
-		// this is going to require the index file so that we can make sure that we can read it
-		
+	expect(newFile.length).to.eql(1);
+		//this is going to require the index file so that we can make sure that we can read it
 	});
 });
+
+
+
+
+//given two files, it produces a new file with the combination of content from each
+
+
 
 //this test makes sure we can find the place where the content will go
 describe('lets find the content', function() {
@@ -52,6 +64,7 @@ describe('lets find the content', function() {
 		//this is going to require the index file so that we can make sure that we can read it
 	});
 });
+
 
 //this test finds what content needs to be replaced
 describe('content replacement', function() {
