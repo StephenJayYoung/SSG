@@ -65,14 +65,14 @@ describe('combine files', function() {
 });
 
 describe('generate a string', function() {
-	it.skip('takes input from 2 strings and returns 1 supercalifragilisticexpialidocious string', function(done) {
-	//it is going to expect the content to be a file with new content
-	var generator = new SiteGenerator();
-	var string1 = ("this is the combo of all of the {{contents}}");
- 	var string2 = ('majestic things');
- 	var expectedString = ('this is the combo of the majestic things');
-	var result = generator.combined(string1, string2);      //combine(layoutFile, contentFile);
-	expect(result).to.eql(expectedString);
+	it('takes input from 2 strings and returns 1 supercalifragilisticexpialidocious string', function() {
+		//it is going to expect the content to be a file with new content
+		var generator = new SiteGenerator();
+		var string1 = "this is the combo of the {{contents}}";
+	 	var string2 = 'majestic things';
+	 	var expectedString = 'this is the combo of the majestic things';
+		var result = generator.combined(string1, string2);      //combine(layoutFile, contentFile);
+		expect(result).to.eql(expectedString);
 		//this is going to require the index file so that we can make sure that we can read it
 	});
 });
@@ -95,13 +95,13 @@ describe('lets find the content', function() {
 });
 
 
-//this test finds what content needs to be replaced
-describe('content replacement', function() {
-	it.skip('finds what content needs to be replaced', function(done) {
-		var reader = new fileReader();
-		//this is going to require the index file so that we can make sure that we can read it
-	});
-});
+// //this test finds what content needs to be replaced
+// describe('content replacement', function() {
+// 	it.skip('finds what content needs to be replaced', function(done) {
+// 		var reader = new fileReader();
+// 		//this is going to require the index file so that we can make sure that we can read it
+// 	});
+// });
 
 
 
