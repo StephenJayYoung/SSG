@@ -18,25 +18,25 @@ describe('site generator', function() {
 	});
 	it.skip('generates a site with cats file', function(done) {
 		var generator = new SiteGenerator();
-		// this is going to require the index file. This file will contain our new static site generator
 		var site2 = path.join(__dirname, 'fixtures/site2');
-		//this makes a shortcut to the file called site1
 		var expectedSite2 = path.join(__dirname, 'fixtures/expected/site2');
-		//this makes a shortcut to the file called expected site1
 		var tmpDirectory = path.join(__dirname, 'tmp');
-		//this creates a shortcut for the temporary directory which will hold the new file once 'compiled'
 		generator.generateSite(site2, tmpDirectory, function() {
-		//we don't know how this works yet, but it takes the following arguments: site1, tmpDirectory, and a function. This is the callback.
-			fs.readdir(tmpDirectory, function(err, contents) {
-			//the function is going to read the directory, and if it can't read the file, it will receive an error.
-				expect(contents).to.eql(['index.html']);
-				//if it can read the file, it will expect the contents of those files to match the contents of index.html
-				fs.readFile(path.join(tmpDirectory, 'index.html'), { encoding: 'utf8' }, function(err, actualContents) {
-					fs.readFile(path.join(expectedSite2, 'index.html'), { encoding: 'utf8' }, function(err, expectedContents) {
-						expect(actualContents).to.eql(expectedContents);
-						done();
-					});
-				});
+			// fs.readdir(tmpDirectory, function(err, contents) {
+			// 	expect(contents).to.eql(['index.html']);
+			// 	fs.readFile(path.join(tmpDirectory, 'index.html'), { encoding: 'utf8' }, function(err, actualContents) {
+			// 		fs.readFile(path.join(expectedSite2, 'index.html'), { encoding: 'utf8' }, function(err, expectedContents) {
+			// 			expect(actualContents).to.eql(expectedContents);
+			// 			done();
+			// 		});
+			// 	});
+			// });
+				var dirs = { expected: expectedSite2, output: tmpDirectory };
+					console.log(dirs);
+					helpers.dirsContents(dirs, function(err, contents) {
+						console.log(contents);
+						expect(contents.output).to.eql(contents.expected);
+				done();
 			});
 		});
 	});
