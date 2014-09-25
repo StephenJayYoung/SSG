@@ -14,10 +14,10 @@ function SiteGenerator() {
 
 /**
  * Generate new site in a output directory based on input directory.
- * It will write a new file to `outputFile` and call the
- * callback when complete. The contents of the directory is based on the
- * `layoutFile` and the `contentFile` from the input directory run through 
- * the generateFile method.
+ *  It will take any file from the input directory other then the layout
+ *  file and combine it with the layout, writing that to the output directory.
+ * It will call the callback when complete.
+ *
  *
  * @method
  * @param  {String} siteDirectory - The full path to the input directory.
