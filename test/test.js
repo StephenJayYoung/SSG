@@ -16,7 +16,7 @@ describe('site generator', function() {
 		});
 	});
 
-	it.skip('generates a site', function(done) {
+	it('generates a site', function(done) {
 		var generator = new SiteGenerator();
 		// this is going to require the index file. This file will contain our new static site generator
 		var site1 = path.join(__dirname, 'fixtures/site1');
