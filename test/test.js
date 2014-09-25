@@ -22,20 +22,9 @@ describe('site generator', function() {
 		var expectedSite2 = path.join(__dirname, 'fixtures/expected/site2');
 		var tmpDirectory = path.join(__dirname, 'tmp');
 		generator.generateSite(site2, tmpDirectory, function() {
-			// fs.readdir(tmpDirectory, function(err, contents) {
-			// 	expect(contents).to.eql(['index.html']);
-			// 	fs.readFile(path.join(tmpDirectory, 'index.html'), { encoding: 'utf8' }, function(err, actualContents) {
-			// 		fs.readFile(path.join(expectedSite2, 'index.html'), { encoding: 'utf8' }, function(err, expectedContents) {
-			// 			expect(actualContents).to.eql(expectedContents);
-			// 			done();
-			// 		});
-			// 	});
-			// });
-				var dirs = { expected: expectedSite2, output: tmpDirectory };
-					console.log(dirs);
-					helpers.dirsContents(dirs, function(err, contents) {
-						console.log(contents);
-						expect(contents.output).to.eql(contents.expected);
+			var dirs = { expected: expectedSite2, output: tmpDirectory };
+			helpers.dirsContents(dirs, function(err, contents) {
+				expect(contents.output).to.eql(contents.expected);
 				done();
 			});
 		});
@@ -78,6 +67,28 @@ describe('site generator', function() {
 						done();
 					});
 				});
+			});
+		});
+	});
+
+	describe('listFiles', function() {
+		it.skip('what is the contents of a directory other then layout', function() {
+			var generator = new SiteGenerator();
+			var site1 = path.join(__dirname, 'fixtures/site1');
+			var index = path.join(__dirname, 'fixtures/site1/index.html')
+			console.log (site1);
+			console.log (index);
+			generator.listFiles(site1, function(err, result) {
+				expect(result).to.eql([index]);
+			});
+		});
+		it.skip('what is the contents of a directory other then layout', function() {
+			var generator = new SiteGenerator();
+			var site2 = path.join(__dirname, 'fixtures/site2');
+			var cats = path.join(__dirname, 'fixtures/site2/cats.html');
+			var foodCarts = path.join(__dirname, 'fixtures/site2/foodcarts.html')
+			generator.listFiles(site2, function(err, result) {
+				expect(result).to.eql([cats, foodCarts]);
 			});
 		});
 	});

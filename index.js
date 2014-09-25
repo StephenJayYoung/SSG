@@ -72,6 +72,9 @@ SiteGenerator.prototype.combined = function(string1, string2) {
 	var newString = string1.replace('{{ content }}', string2);
 	return newString;
 };
+SiteGenerator.prototype.listFiles = function(directory, cb) {
+	cb(null);
+};
 
 module.exports = SiteGenerator;
 
