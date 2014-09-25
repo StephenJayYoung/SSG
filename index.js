@@ -1,5 +1,6 @@
 var fs = require('fs');
 var path = require('path');
+var _ = require('lodash');
 
 /**
  * @constructor
@@ -72,12 +73,71 @@ SiteGenerator.prototype.combined = function(string1, string2) {
 	var newString = string1.replace('{{ content }}', string2);
 	return newString;
 };
+
+/**
+ * @callback SiteGenerator~listFilesCallback
+ * @param {Error} err The error if one occurred.
+ */
+
+/**
+ * Look at a directory and determine what files are in it other than layout
+ *
+ * @method 
+ * @param  {String} Directory - The full path to the directory  file.
+ * @param  {SiteGenerator~listFilesCallback} cb - The callback.
+ * @ return {array} the different file paths that are in the directory
+ * {}
+ */
+
+
+
+
+
 SiteGenerator.prototype.listFiles = function(directory, cb) {
-	cb(null);
+	//read directory 
+	//filter out the layout file
+	//map
+	fs.readdir(directory, function(err, files){
+		if (err) {return}
+		console.log(files);
+		var fileList = _.filter(files, function(file){
+			return file !== 'layout.html';
+		});
+		var fullFileName = fileList.map(function(file){
+			return path.join(directory, file);
+		});
+		console.log(fullFileName);
+		return fullFileName;
+		cb(null);
+	})
 };
 
 module.exports = SiteGenerator;
 
-//TODO: 1) document out generateFile and generateSite -parameters, return value, what does it do?
-//more tests for generateSite, describe explicitly what they do
-//test: how do we make sure that we are calling the correct directory pending additional files?
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -72,7 +72,7 @@ describe('site generator', function() {
 	});
 
 	describe('listFiles', function() {
-		it.skip('what is the contents of a directory other then layout', function() {
+		it('what is the contents of a directory other then layout', function() {
 			var generator = new SiteGenerator();
 			var site1 = path.join(__dirname, 'fixtures/site1');
 			var index = path.join(__dirname, 'fixtures/site1/index.html')
@@ -82,7 +82,7 @@ describe('site generator', function() {
 				expect(result).to.eql([index]);
 			});
 		});
-		it.skip('what is the contents of a directory other then layout', function() {
+		it('what is the contents of a directory other then layout', function() {
 			var generator = new SiteGenerator();
 			var site2 = path.join(__dirname, 'fixtures/site2');
 			var cats = path.join(__dirname, 'fixtures/site2/cats.html');
