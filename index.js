@@ -28,6 +28,8 @@ function SiteGenerator() {
  */
 
 SiteGenerator.prototype.generateSite = function(siteDirectory, outputDirectory, cb) {
+	//arrayo'files = listFiles (siteDirectory)
+	//for each file in the arrayo'files generateFile
 	var layoutFile = path.join(siteDirectory, 'layout.html');
 	var indexFile = path.join(siteDirectory, 'index.html');
 	var outputFile = path.join(outputDirectory, 'index.html');
