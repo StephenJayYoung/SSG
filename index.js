@@ -30,6 +30,8 @@ function SiteGenerator() {
 SiteGenerator.prototype.generateSite = function(siteDirectory, outputDirectory, cb) {
 	//arrayo'files = listFiles (siteDirectory)
 	//for each file in the arrayo'files generateFile
+	// var arrayDir = this.listFiles(siteDirectory, cb)
+	// console.log(arrayDir);
 	var layoutFile = path.join(siteDirectory, 'layout.html');
 	var indexFile = path.join(siteDirectory, 'index.html');
 	var outputFile = path.join(outputDirectory, 'index.html');
@@ -100,17 +102,14 @@ SiteGenerator.prototype.listFiles = function(directory, cb) {
 	//filter out the layout file
 	//map
 	fs.readdir(directory, function(err, files){
-		if (err) {return}
-		console.log(files);
-		var fileList = _.filter(files, function(file){
+		if (err) { cb(err); return; }
+		var fileNames = _.filter(files, function(file){
 			return file !== 'layout.html';
 		});
-		var fullFileName = fileList.map(function(file){
+		var fullFileNames = fileNames.map(function(file){
 			return path.join(directory, file);
 		});
-		console.log(fullFileName);
-		return fullFileName;
-		cb(null);
+		cb(null, fullFileNames);
 	})
 };
 

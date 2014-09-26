@@ -72,23 +72,23 @@ describe('site generator', function() {
 	});
 
 	describe('listFiles', function() {
-		it('what is the contents of a directory other then layout', function() {
+		it('what is the contents of a directory other then layout', function(done) {
 			var generator = new SiteGenerator();
 			var site1 = path.join(__dirname, 'fixtures/site1');
 			var index = path.join(__dirname, 'fixtures/site1/index.html')
-			console.log (site1);
-			console.log (index);
 			generator.listFiles(site1, function(err, result) {
 				expect(result).to.eql([index]);
+				done();
 			});
 		});
-		it('what is the contents of a directory other then layout', function() {
+		it('what is the contents of a directory other then layout', function(done) {
 			var generator = new SiteGenerator();
 			var site2 = path.join(__dirname, 'fixtures/site2');
 			var cats = path.join(__dirname, 'fixtures/site2/cats.html');
 			var foodCarts = path.join(__dirname, 'fixtures/site2/foodcarts.html')
 			generator.listFiles(site2, function(err, result) {
 				expect(result).to.eql([cats, foodCarts]);
+				done();
 			});
 		});
 	});
