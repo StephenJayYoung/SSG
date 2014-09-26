@@ -30,8 +30,12 @@ function SiteGenerator() {
 SiteGenerator.prototype.generateSite = function(siteDirectory, outputDirectory, cb) {
 	this.listFiles(siteDirectory, function(err, files) {
 		console.log(files);
-		var layoutFile = path.join(siteDirectory, 'layout.html');
+		files.forEach()
+			//read the files
+				// then combine with the layout
+					//then generate file
 		var indexFile = path.join(siteDirectory, 'index.html');
+		var layoutFile = path.join(siteDirectory, 'layout.html');
 		var outputFile = path.join(outputDirectory, 'index.html');
 		this.generateFile(layoutFile, indexFile, outputFile, cb);
 	}.bind(this));
