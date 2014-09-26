@@ -29,15 +29,27 @@ function SiteGenerator() {
 
 SiteGenerator.prototype.generateSite = function(siteDirectory, outputDirectory, cb) {
 	this.listFiles(siteDirectory, function(err, files) {
-		console.log(files);
-		files.forEach()
+		// console.log(files);s
+		var numberOfGenerateFileRuns = 0;
+		
+		files.forEach(function(file) {
+			console.log(file);
+			var layoutFile = path.join(siteDirectory, 'layout.html');
+			var outputFile = path.join(outputDirectory, path.basename(file));
+			//create a path for each file
+			this.generateFile(layoutFile, file, outputFile, function(err) {
+				// this takes a long time.
+				// it also happens for multiple things
+				// only call the callback if all of the files have been generated
+				numberOfGenerateFileRuns = numberOfGenerateFileRuns+1;
+				if (files.length === numberOfGenerateFileRuns) {
+					cb(null);
+				}
+			});
+		}.bind(this))
 			//read the files
 				// then combine with the layout
 					//then generate file
-		var indexFile = path.join(siteDirectory, 'index.html');
-		var layoutFile = path.join(siteDirectory, 'layout.html');
-		var outputFile = path.join(outputDirectory, 'index.html');
-		this.generateFile(layoutFile, indexFile, outputFile, cb);
 	}.bind(this));
 };
 
