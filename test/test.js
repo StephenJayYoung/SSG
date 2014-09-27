@@ -16,7 +16,7 @@ describe('site generator', function() {
 			});
 		});
 	});
-	it('generates a site with cats file', function(done) {
+	it('generates a site with cats and carts files', function(done) {
 		var generator = new SiteGenerator();
 		var site2 = path.join(__dirname, 'fixtures/site2');
 		var expectedSite2 = path.join(__dirname, 'fixtures/expected/site2');

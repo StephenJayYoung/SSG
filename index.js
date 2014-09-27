@@ -31,9 +31,8 @@ SiteGenerator.prototype.generateSite = function(siteDirectory, outputDirectory, 
 	this.listFiles(siteDirectory, function(err, files) {
 		// console.log(files);s
 		var numberOfGenerateFileRuns = 0;
-		
+
 		files.forEach(function(file) {
-			console.log(file);
 			var layoutFile = path.join(siteDirectory, 'layout.html');
 			var outputFile = path.join(outputDirectory, path.basename(file));
 			//create a path for each file
