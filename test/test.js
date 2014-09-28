@@ -16,7 +16,7 @@ describe('site generator', function() {
 			});
 		});
 	});
-	it.skip('generates a site with cats file', function(done) {
+	it('generates a site with cats and carts file', function(done) {
 		var generator = new SiteGenerator();
 		var site2 = path.join(__dirname, 'fixtures/site2');
 		var expectedSite2 = path.join(__dirname, 'fixtures/expected/site2');
@@ -25,6 +25,32 @@ describe('site generator', function() {
 			var dirs = { expected: expectedSite2, output: tmpDirectory };
 			helpers.dirsContents(dirs, function(err, contents) {
 				expect(contents.output).to.eql(contents.expected);
+				done();
+			});
+		});
+	});
+	it.skip('generates calls up an error if there is no layout file', function(done) {
+		var generator = new SiteGenerator();
+		var site3 = path.join(__dirname, 'fixtures/site3');
+		var expectedsite3 = path.join(__dirname, 'fixtures/expected/site3');
+		var tmpDirectory = path.join(__dirname, 'tmp');
+		generator.generateSite(site3, tmpDirectory, function() {
+			var dirs = { expected: expectedSite3, output: tmpDirectory };
+			helpers.dirsContents(dirs, function(err, contents) {
+				expect(contents.output).to.eql(err);
+				done();
+			});
+		});
+	});
+	it.skip('generates calls up an error if there is no contents file', function(done) {
+		var generator = new SiteGenerator();
+		var site4 = path.join(__dirname, 'fixtures/site4');
+		var expectedsite4 = path.join(__dirname, 'fixtures/expected/site4');
+		var tmpDirectory = path.join(__dirname, 'tmp');
+		generator.generateSite(site4, tmpDirectory, function() {
+			var dirs = { expected: expectedSite4, output: tmpDirectory };
+			helpers.dirsContents(dirs, function(err, contents) {
+				expect(contents.output).to.eql(err);
 				done();
 			});
 		});

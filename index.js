@@ -28,14 +28,28 @@ function SiteGenerator() {
  */
 
 SiteGenerator.prototype.generateSite = function(siteDirectory, outputDirectory, cb) {
-	//arrayo'files = listFiles (siteDirectory)
-	//for each file in the arrayo'files generateFile
-	// var arrayDir = this.listFiles(siteDirectory, cb)
-	// console.log(arrayDir);
-	var layoutFile = path.join(siteDirectory, 'layout.html');
-	var indexFile = path.join(siteDirectory, 'index.html');
-	var outputFile = path.join(outputDirectory, 'index.html');
-	this.generateFile(layoutFile, indexFile, outputFile, cb);
+	this.listFiles(siteDirectory, function(err, files) {
+		// console.log(files);s
+		var numberOfGenerateFileRuns = 0;
+
+		files.forEach(function(file) {
+			var layoutFile = path.join(siteDirectory, 'layout.html');
+			var outputFile = path.join(outputDirectory, path.basename(file));
+			//create a path for each file
+			this.generateFile(layoutFile, file, outputFile, function(err) {
+				// this takes a long time.
+				// it also happens for multiple things
+				// only call the callback if all of the files have been generated
+				numberOfGenerateFileRuns = numberOfGenerateFileRuns+1;
+				if (files.length === numberOfGenerateFileRuns) {
+					cb(null);
+				}
+			});
+		}.bind(this))
+			//read the files
+				// then combine with the layout
+					//then generate file
+	}.bind(this));
 };
 
 /**
@@ -81,6 +95,7 @@ SiteGenerator.prototype.combined = function(string1, string2) {
 /**
  * @callback SiteGenerator~listFilesCallback
  * @param {Error} err The error if one occurred.
+ * @param {Array.<String>} files The different full file paths that are in the directory.
  */
 
 /**
@@ -89,14 +104,7 @@ SiteGenerator.prototype.combined = function(string1, string2) {
  * @method 
  * @param  {String} Directory - The full path to the directory  file.
  * @param  {SiteGenerator~listFilesCallback} cb - The callback.
- * @ return {array} the different file paths that are in the directory
- * {}
  */
-
-
-
-
-
 SiteGenerator.prototype.listFiles = function(directory, cb) {
 	//read directory 
 	//filter out the layout file
